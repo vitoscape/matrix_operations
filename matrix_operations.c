@@ -8,8 +8,7 @@
 #include "matrix_operations.h"
 
 // Глобальные переменные
-uint8_t n, m, l;    // Размерности матриц
-
+int n, m, l;    // Размерности матриц
 
 // Главное меню
 void start_screen() {
@@ -42,31 +41,43 @@ void start_screen() {
 
 // Умножение
 void multiplication() {
-    char inp_m[10];
-    system("clear");    // Очистка экрана
-    printf("Matrix multiplication: MxN x NxL\n\n");
-    printf("    / x ... x \\     / x ... x \\\n");
-    printf("   |  . ... .  |   |  . ... .  |\n");
-    printf("N  |  . ... .  | X |  . ... .  |  N\n");
-    printf("   |  . ... .  |   |  . ... .  |\n");
-    printf("    \\ x ... x /     \\ x ... x /\n\n");
-    printf("         M               L\n\n");
-    printf("Enter sizes: M, N, L\nM = ");
+    //int inp_m[10];
+    do {
+        system("clear");    // Очистка экрана
+        printf("Matrix multiplication: NxM x MxL\n \n");
+        printf("    / x ... x \\     / x ... x \\  \n");
+        printf("   |  . ... .  |   |  . ... .  |   \n");
+        printf("N  |  . ... .  | X |  . ... .  |  M\n");
+        printf("   |  . ... .  |   |  . ... .  |   \n");
+        printf("    \\ x ... x /     \\ x ... x /  \n\n");
+        printf("         M               L\n\n");
+        printf("Enter sizes: M, N, L\n");
 
-    
-    // Вводи размерностей матриц
-    scanf("%s", inp_m);
-    m = atoi(inp_m);
+        // Ввод размерностей матриц
+        printf("M = ");
+        scanf("%d", &m);
+        //m = atoi(inp_m);
 
-    printf("N = ");
-    scanf("%s", inp_m);
-    n = atoi(inp_m);
+        printf("N = ");
+        scanf("%d", &n);
+        //n = atoi(inp_m);
 
-    printf("L = ");
-    scanf("%s", inp_m);
-    l = atoi(inp_m);
+        printf("L = ");
+        scanf("%d", &l);
+        //l = atoi(inp_m);
 
-    printf("M = %d, N = %d, L = %d", m, n, l);
+        //printf("M = %d, N = %d, L = %d", m, n, l);
+    } while (m <= 0 || n <= 0 || l <= 0);
+
+    //Матрицы
+    float matrix1[n][m], matrix2[m][l];
+
+    printf("Input first matrix:\n");
+    for (uint8_t i = 0; i < m; i++) {
+        for (uint8_t j = 0; j < n; j++) {
+            scanf("%f", &matrix1[i][j]);
+        }
+    }
 }
 
 int main() {

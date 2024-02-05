@@ -70,11 +70,32 @@ void multiplication() {
     } while (m <= 0 || n <= 0 || l <= 0);
 
     //Матрицы
-    float matrix1[n][m], matrix2[m][l];
+    //float matrix1[n][m], matrix2[m][l], matrix_result[n][l];
 
+    // Выделение памяти под двумерные массивы
+	float** matrix1 = (float**) malloc(n * sizeof(float*));
+	float** matrix2 = (float**) malloc(m * sizeof(float*));
+	float** matrix_result = (float**) malloc(n * sizeof(float*));
+
+    // Выделение памяти под элементы матриц
+	for (uint8_t i = 0; i < m; i++) {
+		matrix1[i] = (float*) malloc(m * sizeof(float));
+	}
+    for (uint8_t i = 0; i < l; i++) {
+        matrix2[i] = (float*) malloc(l * sizeof(float));
+		matrix_result[i] = (float*) malloc(l * sizeof(float));
+    }
+
+    // Ввод матриц
     printf("Input first matrix:\n");
     for (uint8_t i = 0; i < m; i++) {
         for (uint8_t j = 0; j < n; j++) {
+            scanf("%f", &matrix1[i][j]);
+        }
+    }
+    printf("Input second matrix:\n");
+    for (uint8_t i = 0; i < l; i++) {
+        for (uint8_t j = 0; j < m; j++) {
             scanf("%f", &matrix1[i][j]);
         }
     }

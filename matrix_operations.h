@@ -12,6 +12,7 @@
 typedef struct {
     uint8_t m1_line;    // Строка первой матрицы
     uint8_t m2_column;  // Столбец второй матрицы
+    uint8_t m_size;     // Кол-во элементов в строке/столбце
     float** m1;
     float** m2; // Указатели на матрицы
     float** mr;

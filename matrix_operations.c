@@ -86,6 +86,13 @@ void multiplication() {
 		matrix_result[i] = (float*) malloc(l * sizeof(float));
     }
 
+    uint8_t calcN = n * l;  // Количество потоков (вычислений каждого элемента)
+
+    // Выделение памяти под массив идентификаторов потоков
+    pthread_t* thr = (pthread_t*) malloc(calcN * sizeof(pthread_t));
+    // Выделение памяти под структуры с потоковыми данными
+    pthr_data thr_data = (pthr_data*) malloc(calcN * sizeof(pthr_data));
+
     // Ввод матриц
     printf("Input first matrix:\n");
     for (uint8_t i = 0; i < m; i++) {
@@ -98,6 +105,10 @@ void multiplication() {
         for (uint8_t j = 0; j < m; j++) {
             scanf("%f", &matrix1[i][j]);
         }
+    }
+
+    for (uint8_t i = 0; i < calcN; i++) {
+        for()
     }
 }
 

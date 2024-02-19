@@ -16,12 +16,16 @@ void* thr_mul(void* thr_data) {
     pthr_data *data = (pthr_data*) thr_data;    // Получение структуры данных
     float _mul_res = 0;                         // Элемент матрицы-результата умножения
 
+    // #ifdef DEBUG
+    // printf("\t--\t%d, %d, %d\n", data->m1_line, data->m2_column, data->m_size);
+    // #endif
+
     // Сумма произведений i-х элементов строки первой матрицы и столбца второй матрицы
     for (uint8_t i = 0; i < data->m_size; i++) {
         _mul_res += data->m1[data->m1_line][i] * data->m2[i][data->m2_column];
 
         #ifdef DEBUG
-        printf("\t--\tmultiplying %.2f * %.2f: %.2f\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
+        printf("\t--\tmultiplying %.2f * %.2f: %.2f\n\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
         #endif
     }
     data->mr[data->m1_line][data->m2_column] = _mul_res;    // Присвоение результата матрице
@@ -126,6 +130,9 @@ void multiplication() {
         }
     }
 
+/*
+todo: Исправить этот цикл
+*/
     // Инициализация структур потоков
     for (uint8_t i = 0; i < n; i++) {
         for (uint8_t j = 0; j < l; j++) {
@@ -138,6 +145,10 @@ void multiplication() {
             thr_data[number].m1 = matrix1;
             thr_data[number].m2 = matrix2;
             thr_data[number].mr = matrix_result;
+
+            #ifdef DEBUG
+            printf("\t--\tInit thread #%d: %d, %d, %d\n", number, i, j, m);
+            #endif
 
             // Запуск потока
             pthread_create(&(thr[number]), NULL, thr_mul, &thr_data[number]);

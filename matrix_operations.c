@@ -25,7 +25,7 @@ void* thr_mul(void* thr_data) {
         _mul_res += data->m1[data->m1_line][i] * data->m2[i][data->m2_column];
 
         #ifdef DEBUG
-        printf("\t--\tmultiplying %.2f * %.2f: %.2f\n\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
+        printf("\t--\tmultiplying %.2f * %.2f: %.2f\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
         #endif
     }
     data->mr[data->m1_line][data->m2_column] = _mul_res;    // Присвоение результата матрице
@@ -133,11 +133,11 @@ void multiplication() {
 /*
 todo: Исправить этот цикл
 */
+    uint8_t number = 0; // Номер потока
+
     // Инициализация структур потоков
     for (uint8_t i = 0; i < n; i++) {
         for (uint8_t j = 0; j < l; j++) {
-            uint8_t number = i + j; // Номер потока
-
             // Заполнение структуры потока
             thr_data[number].m1_line = i;
             thr_data[number].m2_column = j;
@@ -152,6 +152,7 @@ todo: Исправить этот цикл
 
             // Запуск потока
             pthread_create(&(thr[number]), NULL, thr_mul, &thr_data[number]);
+            number++;   // Увеличение номера потока
         }
     }
 

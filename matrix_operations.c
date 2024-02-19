@@ -10,6 +10,21 @@
 // Глобальные переменные
 int n, m, l;    // Размерности матриц
 
+
+// Функция потока
+void* thr_mul(void* thr_data) {
+    pthr_data *data = (pthr_data*) thr_data;    // Получение структуры данных
+    float _mul_res = 0;                         // Элемент матрицы-результата умножения
+
+    // Сумма произведений i-х элементов строки первой матрицы и столбца второй матрицы
+    for (uint8_t i = 0; i < data->m_size; i++) {
+        _mul_res += data->m1[data->m1_line][i] * data->m2[i][data->m2_column];
+    }
+    data->mr[data->m1_line][data->m2_column] = _mul_res;    // Присвоение результата матрице
+
+    return NULL;
+}
+
 // Главное меню
 void start_screen() {
     uint8_t continue_flag = 0; // Флаг продолжения
@@ -17,7 +32,7 @@ void start_screen() {
     while(!continue_flag) {
         continue_flag = 1;  // Взвод флага на пропуск
         system("clear");    // Очистка экрана
-        char inp_s = 0;  // Вводимый символ
+        char inp_s = 0;     // Вводимый символ
 
         printf("Matrix operations.\nChoose operation and press Enter key.\n\n");
         printf("%d. Multiplication\n", MUL_POINT);
@@ -91,7 +106,7 @@ void multiplication() {
     // Выделение памяти под массив идентификаторов потоков
     pthread_t* thr = (pthread_t*) malloc(calcN * sizeof(pthread_t));
     // Выделение памяти под структуры с потоковыми данными
-    pthr_data thr_data = (pthr_data*) malloc(calcN * sizeof(pthr_data));
+    pthr_data* thr_data = (pthr_data*) malloc(calcN * sizeof(pthr_data));
 
     // Ввод матриц
     printf("Input first matrix:\n");
@@ -107,8 +122,9 @@ void multiplication() {
         }
     }
 
+    // Инициализация структур потоков
     for (uint8_t i = 0; i < calcN; i++) {
-        for()
+        
     }
 }
 

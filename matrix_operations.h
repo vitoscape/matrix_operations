@@ -5,6 +5,8 @@
 #define MUL_POINT 1 // Номер пункта Умножение
 #define EXT_POINT 2 // Номер пункта Выход
 
+#define DEBUG
+
 // Макросы
 #define ctoi(c) c - '0'     // Перевод char в int
 

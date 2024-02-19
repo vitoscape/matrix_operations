@@ -19,6 +19,10 @@ void* thr_mul(void* thr_data) {
     // Сумма произведений i-х элементов строки первой матрицы и столбца второй матрицы
     for (uint8_t i = 0; i < data->m_size; i++) {
         _mul_res += data->m1[data->m1_line][i] * data->m2[i][data->m2_column];
+
+        #ifdef DEBUG
+        printf("\t--\tmultiplying %.2f * %.2f: %.2f\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
+        #endif
     }
     data->mr[data->m1_line][data->m2_column] = _mul_res;    // Присвоение результата матрице
 
@@ -118,7 +122,7 @@ void multiplication() {
     printf("Input second matrix:\n");
     for (uint8_t i = 0; i < l; i++) {
         for (uint8_t j = 0; j < m; j++) {
-            scanf("%f", &matrix1[i][j]);
+            scanf("%f", &matrix2[i][j]);
         }
     }
 

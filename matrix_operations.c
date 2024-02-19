@@ -16,9 +16,9 @@ void* thr_mul(void* thr_data) {
     pthr_data *data = (pthr_data*) thr_data;    // Получение структуры данных
     float _mul_res = 0;                         // Элемент матрицы-результата умножения
 
-    // #ifdef DEBUG
-    // printf("\t--\t%d, %d, %d\n", data->m1_line, data->m2_column, data->m_size);
-    // #endif
+    #ifdef DEBUG
+    printf("\t--\t%d, %d, %d\n", data->m1_line, data->m2_column, data->m_size);
+    #endif
 
     // Сумма произведений i-х элементов строки первой матрицы и столбца второй матрицы
     for (uint8_t i = 0; i < data->m_size; i++) {
@@ -93,7 +93,7 @@ void multiplication() {
     } while (m <= 0 || n <= 0 || l <= 0);
 
     //Матрицы
-    //float matrix1[n][m], matrix2[m][l], matrix_result[n][l];
+    // float matrix1[n][m], matrix2[m][l], matrix_result[n][l];
 
     // Выделение памяти под двумерные массивы
 	float** matrix1 = (float**) malloc(n * sizeof(float*));
@@ -130,9 +130,7 @@ void multiplication() {
         }
     }
 
-/*
-todo: Исправить этот цикл
-*/
+
     uint8_t number = 0; // Номер потока
 
     // Инициализация структур потоков

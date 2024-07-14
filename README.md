@@ -1,1 +1,1 @@
-Matrix operations program using multithreads (pthread.h).
+Matrix operations program using multithreading (pthread.h).

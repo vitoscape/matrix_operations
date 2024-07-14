@@ -7,9 +7,9 @@
 
 #include "matrix_operations.h"
 
+
 // Global variables
 int n, m, l;	// Matrix dimensions
-
 
 
 // Thread function
@@ -70,22 +70,22 @@ void multiplication() {
 	do {
 		system("clear");	// Clear screen
 		printf("Matrix multiplication: NxM x MxL\n \n");
-		printf("	/ x ... x \\	 / x ... x \\  \n");
+		printf("    / x ... x \\     / x ... x \\  \n");
 		printf("   |  . ... .  |   |  . ... .  |   \n");
 		printf("N  |  . ... .  | X |  . ... .  |  M\n");
 		printf("   |  . ... .  |   |  . ... .  |   \n");
-		printf("	\\ x ... x /	 \\ x ... x /  \n\n");
-		printf("		 M			   L\n\n");
+		printf("    \\ x ... x /     \\ x ... x /  \n\n");
+		printf("         M               L\n\n");
 		printf("Enter sizes: M, N, L\n");
 
 		// Enter matrix dimensions
-		printf("M = ");
-		scanf("%d", &m);
-		//m = atoi(inp_m);
-
 		printf("N = ");
 		scanf("%d", &n);
 		//n = atoi(inp_m);
+
+		printf("M = ");
+		scanf("%d", &m);
+		//m = atoi(inp_m);
 
 		printf("L = ");
 		scanf("%d", &l);
@@ -113,7 +113,7 @@ void multiplication() {
 
 	uint8_t calcN = n * l;	// Threads count (number of every element calculation)
 
-	// Memory allocation for threads id array
+	// Memory allocation for array of thread IDs
 	pthread_t* thr = (pthread_t*) malloc(calcN * sizeof(pthread_t));
 
 	// Memory allocation for thread data structures

@@ -1,1 +1,1 @@
-Программа для операций с матрицами с использованием многопотокового программирования.
+Matrix operations program using multithreads (pthread.h).

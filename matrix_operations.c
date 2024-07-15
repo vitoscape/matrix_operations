@@ -23,10 +23,10 @@ void* thr_mul(void* thr_data) {
 
 	// Sum of multiplication of i elements of first matrix line and second matrix column
 	for (uint8_t i = 0; i < data->m_size; i++) {
-		_mul_res += data->m1[data->m1_line][i] * data->m2[i][data->m2_column];
+		_mul_res += data->m1[i][data->m1_line] * data->m2[data->m2_column][i];
 
 		#ifdef DEBUG
-		printf("\t--\tmultiplying %.2f * %.2f: %.2f\n", data->m1[data->m1_line][i], data->m2[i][data->m2_column], _mul_res);
+		printf("\t--\tmultiplying %.2f * %.2f: %.2f\n", data->m1[i][data->m1_line], data->m2[data->m2_column][i], _mul_res);
 		#endif
 	}
 	data->mr[data->m1_line][data->m2_column] = _mul_res;	// Add result element to result matrix
@@ -112,6 +112,9 @@ void multiplication() {
 	}
 
 	uint8_t calcN = n * l;	// Threads count (number of every element calculation)
+	#ifdef DEBUG
+	printf("\t--\tcalcN = %d\n", calcN);
+	#endif
 
 	// Memory allocation for array of thread IDs
 	pthread_t* thr = (pthread_t*) malloc(calcN * sizeof(pthread_t));
@@ -149,7 +152,7 @@ void multiplication() {
 			thr_data[number].mr = matrix_result;
 
 			#ifdef DEBUG
-			printf("\t--\tInit thread #%d: %d, %d, %d\n", number, i, j, m);
+			//printf("\t--\tInit thread #%d: %d, %d, %d\n", number, i, j, m);
 			#endif
 
 			// Start thread
@@ -167,7 +170,7 @@ void multiplication() {
 	printf("\n\nResult:\n\n");
 	for (uint8_t i = 0; i < n; i++) {
 		for (uint8_t j = 0; j < l; j++) {
-			printf("%6.2f", matrix_result[i][j]);
+			printf("%10.2f", matrix_result[i][j]);
 		}
 		printf("\n");
 	}
